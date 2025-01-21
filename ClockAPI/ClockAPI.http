@@ -1,6 +1,15 @@
-@ClockAPI_HostAddress = http://localhost:5140
+@ClockAPI_HostAddress = http://localhost:5000
 
 GET {{ClockAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
+### Get clock hands (valid input)
+GET {{ClockAPI_HostAddress}}/api/clock/hands?hours=12&minutes=30
+Accept: application/json
 ###
+GET {{ClockAPI_HostAddress}}/api/clock/hands?hours=7&minutes=0
+Accept: application/json
+
+### Get clock hands (invalid input)
+GET {{ClockAPI_HostAddress}}/api/clock/hands?hours=25&minutes=70
+Accept: application/json
