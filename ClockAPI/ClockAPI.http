@@ -7,9 +7,18 @@ Accept: application/json
 GET {{ClockAPI_HostAddress}}/api/clock/hands?hours=12&minutes=30
 Accept: application/json
 ###
-GET {{ClockAPI_HostAddress}}/api/clock/hands?hours=7&minutes=0
+GET {{ClockAPI_HostAddress}}/api/clock/hands?hours=6&minutes=30
 Accept: application/json
 
 ### Get clock hands (invalid input)
 GET {{ClockAPI_HostAddress}}/api/clock/hands?hours=25&minutes=70
+Accept: application/json
+
+
+### Get time from clock hand angles (valid input)
+GET {{ClockAPI_HostAddress}}/api/clock/time?hourAngle=195&minuteAngle=180
+Accept: application/json
+
+### Get time from clock hand angles (invalid input)
+GET {{ClockAPI_HostAddress}}/api/clock/time?hourAngle=-1&minuteAngle=0
 Accept: application/json

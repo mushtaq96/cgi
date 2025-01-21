@@ -18,15 +18,17 @@ namespace ClockHandAPI.Services
 
         public (int Hours, int Minutes) CalculateTimeFromAngles(int hourAngle, int minuteAngle){
             // input validation
-            if(hourAngle < 0 || hourAngle > 359 || minuteAngle < 0 || minuteAngle > 359){
-                throw new ArgumentException("Invalid input. Hour angle and minute angle should be 0-359");
+            if (hourAngle < 0 || hourAngle >= 360 || minuteAngle < 0 || minuteAngle >= 360)
+            {
+                throw new ArgumentException("Invalid input. Angles must be between 0 and 359.");
             }
-            int hours = (int) (hourAngle / 30); // 360 degrees / 12 hours = 30 degrees per hour
-            int minutes = (int) ((hourAngle % 30) * 2); // 30 degrees / 60 minutes = 0.5 degrees per minute
-            if(minutes != minuteAngle){
-                throw new ArgumentException("Invalid input. The given angles do not correspond to a valid time.");
-            }
-            return (hours, minutes);
+
+            int minutes = minuteAngle / 6; // 360 degrees / 60 minutes = 6 degrees per minute
+            double hours = (hourAngle - (minutes * 0.5)) / 30.0; // Reverse of hour angle calculation
+            hours = hours % 12; // Convert to 12-hour format
+            if (hours < 0) hours += 12; // Handle negative values
+
+            return ((int)Math.Round(hours), minutes);
         }
     }
 }
