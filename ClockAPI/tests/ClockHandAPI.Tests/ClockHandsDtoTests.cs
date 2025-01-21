@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClockHandAPI.Tests
 {
-    public class ClockHandsDto
+    public class ClockHandsDtoTests
     {
         [Theory]
         [InlineData(24, 30, "Hours must be between 0 and 23")]
