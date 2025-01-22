@@ -152,12 +152,3 @@ Use **DTOs** for the reverse operation endpoint to encapsulate input parameters.
 
 ---
 
-## **Contributing**
-
-Contributions are welcome! Please follow these steps:
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Submit a pull request with a detailed description of your changes.
-
----
-
