@@ -1,70 +1,109 @@
-# Getting Started with Create React App
+# Interactive Clock with Draggable Hands
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This FE project is an **Interactive Clock** application that allows users to set the time by dragging the hour and minute hands. The selected time is then converted into **hour and minute angles**, which are displayed on the screen. The application also includes a backend API to calculate the angles based on the selected time.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Draggable Clock Hands**: Users can click and drag the hour and minute hands to set the time.
+- **Real-Time Display**: The selected time is displayed in a user-friendly format (e.g., `03:15`).
+- **Angle Calculation**: The backend API calculates the hour and minute angles based on the selected time.
+- **Interactive Tutorial**: A modal pops up on the first visit to guide users on how to interact with the clock.
+- **Responsive Design**: The UI is centered and works well on different screen sizes.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## How to Use
 
-### `npm test`
+1. **Set the Time**:
+   - Click and drag the **hour hand** to set the hour.
+   - Click and drag the **minute hand** to set the minutes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Convert to Angles**:
+   - Once the time is set, click the **"Convert to Angles"** button.
+   - The hour and minute angles will be displayed below the clock.
 
-### `npm run build`
+3. **Instructions**:
+   - On the first visit, a modal will appear with instructions on how to use the clock.
+   - Click **"Got it!"** to close the modal.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Setup Instructions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+- Node.js (v16 or higher)
+- npm (v8 or higher)
+- Backend API (optional, for angle calculation)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Frontend Setup
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mushtaq96/cgi.git
+   cd ClockAPI
+   cd clock-ui
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-## Learn More
+4. Open the app in your browser:
+   ```
+   http://localhost:3000
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Backend Setup (Optional)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Ensure the backend API is running at `http://localhost:5140`.
+2. The API should have the following endpoint:
+   ```
+   GET /api/clock/hands?hours=<hour>&minutes=<minute>
+   ```
+   Example:
+   ```
+   GET /api/clock/hands?hours=3&minutes=15
+   ```
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Folder Structure
 
-### Analyzing the Bundle Size
+```
+clock-ui/
+├── public/                  # Static assets
+│   ├── index.html           # Main HTML file
+│   └── robots.txt           # Robots configuration
+├── src/                     # Source code
+│   ├── Components/          # React components
+│   │   ├── Clock.jsx        # Clock component
+│   │   └── DraggableClockHands.jsx # Draggable clock hands component
+│   ├── App.js               # Main application component
+│   ├── index.js             # Entry point
+│   ├── index.css            # Global styles
+│   └── reportWebVitals.js   # Performance monitoring
+├── README.md                # Project documentation
+└── package.json             # Project dependencies
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Frontend**:
+  - React.js
+  - CSS (Flexbox for layout)
+- **Backend** (optional):
+  - ASP.NET Core (for angle calculation API)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
