@@ -1,17 +1,28 @@
 using ClockHandAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers(); // extension method that registers the services required for controllers
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IClockService, ClockService>(); // Register IClockService with ClockService
-
+builder.Services.AddSingleton<IClockService, ClockService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Use CORS policy
+app.UseCors("AllowAllOrigins");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -21,4 +32,3 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 app.Run();
-
