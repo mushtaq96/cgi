@@ -24,8 +24,12 @@ function App() {
     const fHour = Math.round(hour); // Round hour to the nearest integer
     console.log('Sending time to backend:', fHour, minute);
 
-    // Call the BE API
-    fetch(`http://localhost:5140/api/clock/hands?hours=${fHour}&minutes=${minute}`)
+    // Call the BE API to get the angles
+    fetch(`https://ab1d-141-72-250-40.ngrok-free.app/api/clock/hands?hours=${fHour}&minutes=${minute}`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'true' // Add this header to bypass the ngrok warning
+      }
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
