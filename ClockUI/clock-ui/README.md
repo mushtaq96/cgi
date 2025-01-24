@@ -1,5 +1,11 @@
 # Interactive Clock with Draggable Hands
 
+## Demo
+
+![Interactive Clock Demo](../../Demo.gif) 
+
+## Project Description
+
 This FE project is an **Interactive Clock** application that allows users to set the time by dragging the hour and minute hands. The selected time is then converted into **hour and minute angles**, which are displayed on the screen. The application also includes a backend API to calculate the angles based on the selected time.
 
 ---
@@ -105,5 +111,49 @@ clock-ui/
 - **Backend** (optional):
   - ASP.NET Core (for angle calculation API)
 
+## Ngrok Setup (WSL/Ubuntu)
 
+To expose both the frontend and backend to the internet, use ngrok. Here's how to set it up:
 
+1. Install ngrok:
+   ```bash
+   sudo apt update
+   sudo apt install ngrok
+   ```
+
+2. Authenticate ngrok with your authtoken:
+   ```bash
+   ngrok config add-authtoken <your-authtoken>
+   ```
+
+3. Create or update the `ngrok.yml` file:
+   ```yaml
+   version: "3"
+   agent:
+       authtoken: <your-authtoken>
+
+   tunnels:
+     frontend:
+       proto: http
+       addr: localhost:3000
+     backend:
+       proto: http
+       addr: localhost:5140 
+   ```
+
+4. Start ngrok:
+   ```bash
+   ngrok start --all
+   ```
+   ![alt text](../clock-ui/ngrok-terminal.png)
+
+5. Update the frontend `fetch` call to use the ngrok backend URL:
+   ```js
+   fetch(`https://<ngrok-backend-url>/api/clock/hands?hours=${fHour}&minutes=${minute}`, {
+     headers: {
+       'ngrok-skip-browser-warning': 'true'
+     }
+   })
+   ```
+
+ 
