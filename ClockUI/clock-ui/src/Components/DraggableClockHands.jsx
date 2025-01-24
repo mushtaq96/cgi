@@ -17,7 +17,8 @@ function DraggableClockHands({ hour, minute, onHourChange, onMinuteChange }) {
     if (dragging === 'hour') {
       let hours = (angle + Math.PI) / (Math.PI * 2) * 12;
       if (hours < 0) hours += 12;
-      onHourChange(Math.floor(hours));
+    //   onHourChange(Math.floor(hours));
+      onHourChange(hours % 12);
     } else if (dragging === 'minute') {
       let minutes = (angle + Math.PI) / (Math.PI * 2) * 60;
       if (minutes < 0) minutes += 60;
@@ -90,7 +91,7 @@ function DraggableClockHands({ hour, minute, onHourChange, onMinuteChange }) {
           x1="100"
           y1="100"
           x2="100"
-          y2="20"
+          y2="30"
           stroke="#000"
           strokeWidth="5"
           transform={`rotate(${360 / 60 * minute}, 100, 100)`}
