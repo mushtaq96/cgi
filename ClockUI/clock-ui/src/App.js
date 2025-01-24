@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DraggableClockHands from './Components/DraggableClockHands';
 import Clock from './Components/Clock';
 
@@ -8,6 +8,7 @@ function App() {
   const [hourDragged, setHourDragged] = useState(false); // Track if hour hand is dragged
   const [minuteDragged, setMinuteDragged] = useState(false); // Track if minute hand is dragged
   const [apiResponse, setApiResponse] = useState(null); // Store API response
+  const [showInstructions, setShowInstructions] = useState(true); // Show instructions on first load
 
   const handleHourChange = (newHour) => {
     setHour(newHour);
@@ -41,11 +42,17 @@ function App() {
       });
   };
 
+  // Hide instructions when the user interacts with the clock
+  useEffect(() => {
+    if (hourDragged || minuteDragged) {
+      setShowInstructions(false);
+    }
+  }, [hourDragged, minuteDragged]);
+
   return (
     <div className="center-container">
       <div className="content">
         <h1>Interactive Clock</h1>
-        {/* <Clock /> */}
         <div className="clock-container">
           <DraggableClockHands
             hour={hour}
@@ -59,18 +66,29 @@ function App() {
               Selected Time: {Math.round(hour)}:{minute.toString().padStart(2, '0')}
             </div>
           )}
-          <button onClick={sendTimeToBackend}>Update Time</button>
+          <button onClick={sendTimeToBackend}>Convert to Angles</button>
         </div>
 
         {/* Display API response (angles) */}
         {apiResponse && (
           <div style={{ margin: '20px 0', fontSize: '18px' }}>
-            <strong>API Response (Angles):</strong>
+            <strong>Result:</strong>
             <pre>
               Hour Angle: {apiResponse.hour}°
               <br />
               Minute Angle: {apiResponse.minute}°
             </pre>
+          </div>
+        )}
+
+        {/* Instructions Modal */}
+        {showInstructions && (
+          <div className="instructions-modal">
+            <div className="instructions-content">
+              <h2>How to Use</h2>
+              <p>Click on either the <strong>hour</strong> or <strong>minute</strong> hand and drag your mouse to set the time.</p>
+              <button onClick={() => setShowInstructions(false)}>Got it!</button>
+            </div>
           </div>
         )}
       </div>
